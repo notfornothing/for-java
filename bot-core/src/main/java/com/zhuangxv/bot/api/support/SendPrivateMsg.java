@@ -20,7 +20,8 @@ public class SendPrivateMsg extends BaseApi {
     public SendPrivateMsg(long userId, MessageChain messageChain) {
         this.param = new SendPrivateMsg.Param();
         this.param.setUserId(userId);
-        this.param.setMessage(JSON.parseArray(messageChain.toMessageString()));
+        String messageString = messageChain.toMessageString();
+        this.param.setMessage(JSON.parseArray(messageString));
         this.param.setAutoEscape(false);
     }
 

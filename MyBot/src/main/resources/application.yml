@@ -1,0 +1,6 @@
+server:
+  port: 15650
+bot:
+  type: ws
+  url: ws://127.0.0.1:15649/ws
+  accessToken: '123456'
