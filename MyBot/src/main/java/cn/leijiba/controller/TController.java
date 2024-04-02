@@ -20,15 +20,11 @@ public class TController {
     }
 
     @FriendMessageHandler()
-    public void tt(String sss, Bot bot, Friend friend) {
-
-        
+    public void tt(String receive, Bot bot, Friend friend) {
+            
         friend.sendMessage(new MessageChain().text("asdf"));
-
-        bot.sendPrivateMessage(friend.getUserId(), new MessageChain().text(sss));
-        System.out.println(sss);
-
-
+        bot.sendPrivateMessage(friend.getUserId(), new MessageChain().text(receive));
+        System.out.println(receive);
     }
 
     public static void main(String[] args) {
