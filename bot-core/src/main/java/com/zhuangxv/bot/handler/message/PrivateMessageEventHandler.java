@@ -1,10 +1,11 @@
 package com.zhuangxv.bot.handler.message;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zhuangxv.bot.annotation.FriendMessageHandler;
 import com.zhuangxv.bot.annotation.TempMessageHandler;
-import com.zhuangxv.bot.core.TempFriend;
 import com.zhuangxv.bot.core.Bot;
+import com.zhuangxv.bot.core.TempFriend;
 import com.zhuangxv.bot.core.component.BotFactory;
 import com.zhuangxv.bot.event.message.PrivateMessageEvent;
 import com.zhuangxv.bot.handler.EventHandler;
@@ -28,6 +29,14 @@ public class PrivateMessageEventHandler implements EventHandler {
         if (!PrivateMessageEvent.isSupport(jsonObject)) {
             return;
         }
+        String message = jsonObject.getString("message");
+        JSONObject singleArrayObject = new JSONObject();
+        JSONObject data = new JSONObject();
+        singleArrayObject.fluentPut("data", data.fluentPut("text", message))
+                .fluentPut("type", "text");
+        JSONArray array = new JSONArray();
+        array.add(singleArrayObject);
+        jsonObject.put("message", array);
         PrivateMessageEvent privateMessageEvent = jsonObject.toJavaObject(PrivateMessageEvent.class);
         MessageChain messageChain = new MessageChain();
         for (int i = 0; i < privateMessageEvent.getMessage().size(); i++) {
